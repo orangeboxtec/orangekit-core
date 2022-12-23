@@ -5,6 +5,9 @@ plugins {
     id("maven-publish")
 }
 
+group = "com.orangebox.kit.core"
+version = "0.0.1"
+
 repositories {
     mavenCentral()
     mavenLocal()
@@ -27,12 +30,11 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("io.quarkus:quarkus-arc")
     implementation("io.quarkus:quarkus-mongodb-client")
+    implementation("org.apache.commons:commons-lang3")
+    implementation("commons-collections:commons-collections")
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
 }
-
-group = "com.orangebox.kit.core"
-version = "0.0.1"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
