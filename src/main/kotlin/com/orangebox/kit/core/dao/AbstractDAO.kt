@@ -1,14 +1,17 @@
 package com.orangebox.kit.core.dao
 
 import com.mongodb.BasicDBObject
+import com.mongodb.client.FindIterable
 import com.mongodb.client.MongoClient
 import com.mongodb.client.MongoDatabase
 import com.mongodb.client.model.Filters
 import com.orangebox.kit.core.annotation.OKEntity
 import com.orangebox.kit.core.annotation.OKId
+import com.orangebox.kit.core.dto.ResponseList
 import org.apache.commons.lang3.reflect.FieldUtils
 import java.lang.reflect.Field
 import java.util.*
+import java.util.Map
 import javax.inject.Inject
 
 abstract class AbstractDAO<O>(klass: Class<O>) {
@@ -77,13 +80,110 @@ abstract class AbstractDAO<O>(klass: Class<O>) {
         db.getCollection(entityName!!, klass!!).replaceOne(Filters.eq("_id", getId(bean)), bean)
     }
 
-    @Throws(Exception::class)
     open fun retrieve(bean: O): O? {
         val db: MongoDatabase = getDb()
         val list = ArrayList<O>()
         db.getCollection(entityName!!, klass!!).find(BasicDBObject("_id", getId(bean))).into(list)
-        return if (!CollectionUtils.isEmpty(list)) {
+        return if (list.isEmpty()) {
             list[0]
         } else null
+    }
+
+    open fun search(search: Search): List<O>? {
+        val db = getDb()
+        val list = ArrayList<O>()
+        val find: FindIterable<O> = db.getCollection(entityName!!, klass!!).find(search.document!!)
+        if (search.sortDoc != null) {
+            find.sort(search.sortDoc)
+        }
+        if (search.first != null) {
+            find.skip(search.first!!)
+        }
+        if (search.maxResults != null) {
+            find.limit(search.maxResults!!)
+        }
+        find.into(list)
+        return list
+    }
+
+    open fun retrieve(search: Search): O? {
+        val list = search(search)
+        return if (list?.isNotEmpty() == true) {
+            list[0]
+        } else null
+    }
+
+    open fun retrieveFirst(): O? {
+        val db = getDb()
+        val list = ArrayList<O>()
+        db.getCollection(entityName!!, klass!!).find().into(list)
+        return if (list.isNotEmpty()) {
+            list[0]
+        } else null
+    }
+
+    open fun delete(bean: O) {
+        val db: MongoDatabase = getDb()
+        db.getCollection(entityName!!, klass!!).deleteOne(Filters.eq("_id", getId(bean)))
+    }
+
+    open fun createBuilder(): SearchBuilder? {
+        return SearchBuilder()
+    }
+
+    open fun listAll(): List<O>? {
+        val db: MongoDatabase = getDb()
+        val list = ArrayList<O>()
+        db.getCollection(entityName!!, klass!!).find().into(list)
+        return list
+    }
+
+    open fun retrieveByNativeField(field: String?, value: String?): O? {
+        val db: MongoDatabase = getDb()
+        val list = ArrayList<O>()
+        (Map.ofEntries(
+            Map.entry(field, value)
+        ) as kotlin.collections.Map<*, *>?)?.let {
+            BasicDBObject(
+                it
+            )
+        }?.let {
+            db.getCollection(entityName!!, klass!!).find(
+                it
+            ).into(list)
+        }
+        return if (list.isNotEmpty()) {
+            list[0]
+        } else null
+    }
+
+    open fun count(search: Search): Long {
+        val db: MongoDatabase = getDb()
+        return db.getCollection(entityName!!, klass!!).countDocuments(search.document!!)
+    }
+
+    private fun pageQuantity(numberOfItensByPage: Int, totalAmount: Long): Long {
+        val pageQuantity: Long = if (totalAmount % numberOfItensByPage != 0L) {
+            totalAmount / numberOfItensByPage + 1
+        } else {
+            totalAmount / numberOfItensByPage
+        }
+        return pageQuantity
+    }
+
+    open fun searchToResponse(search: Search): ResponseList<O>? {
+        val list = search(search)
+        val totalAmount: Long = count(search)
+        val pageQuantity: Long
+        if (search.maxResults != null && search.maxResults!! > 0) {
+            pageQuantity = this.pageQuantity(search.maxResults!!, totalAmount)
+        } else {
+            pageQuantity = this.pageQuantity(10, totalAmount)
+        }
+        val result: ResponseList<O> = ResponseList()
+        result.list = list
+        result.totalAmount = totalAmount
+        result.pageQuantity = pageQuantity
+        return result
     }
 }
