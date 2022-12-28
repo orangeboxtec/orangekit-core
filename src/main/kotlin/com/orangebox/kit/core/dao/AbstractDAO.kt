@@ -23,6 +23,8 @@ abstract class AbstractDAO<O>(klass: Class<O>) {
 
     private var entityName: String? = null
 
+    private var database: String? = null
+
     init {
         if (klass.isAnnotationPresent(OKEntity::class.java)) {
             entityName = klass.getAnnotation(OKEntity::class.java).name
@@ -64,7 +66,11 @@ abstract class AbstractDAO<O>(klass: Class<O>) {
     }
 
     private fun getDb(): MongoDatabase {
-        return mongoClient.getDatabase("orangekit")
+        if(database == null){
+            val bundle = ResourceBundle.getBundle("application")
+            database = bundle.getString("orangekit.mongodb.database")
+        }
+        return mongoClient.getDatabase(database!!)
     }
 
     open fun insert(bean: O) {
