@@ -25,7 +25,7 @@ abstract class AbstractDAO<O>(klass: Class<O>) {
 
     private var entityName: String? = null
 
-    @ConfigProperty(name = "orangekit.mongodb.database")
+    @ConfigProperty(name = "quarkus.mongodb.database")
     private lateinit var database: String
 
     init {

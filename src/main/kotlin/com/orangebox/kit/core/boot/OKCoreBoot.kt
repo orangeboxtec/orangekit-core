@@ -28,12 +28,6 @@ class OKCoreBoot {
                     "                       |___/                                 "
             println(x)
             println("Powered by\n\n")
-            configurationService.checkAndSave("PATH_BASE", "files")
-            configurationService.checkAndSave("SIZE_DETAIL_MOBILE", "600")
-            val params: MutableMap<String, String> = HashMap()
-            params["type"] = "LOCAL"
-            params["urlBase"] = "http://localhost:8080/api"
-            configurationService.checkAndSave("BUCKET_CONFIG", params)
         } catch (e: Exception) {
             e.printStackTrace()
         }
