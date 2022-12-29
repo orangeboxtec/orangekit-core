@@ -9,8 +9,10 @@ class ConfigurationService {
     @Inject
     private lateinit var configurationDAO: ConfigurationDAO
 
-    fun list(): List<Configuration?>? {
-        return configurationDAO.listAll()
+    fun list(): List<Configuration>? {
+        return configurationDAO.search(configurationDAO.createBuilder()
+            .appendParamQuery("key", "chave")
+            .build())
     }
 
     fun add(configuration: Configuration) {

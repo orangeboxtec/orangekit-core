@@ -23,4 +23,11 @@ class ExampleResource {
     fun addConfiguration(configuration: Configuration){
         configurationService.add(configuration)
     }
+
+    @GET
+    @Path("/list")
+    @Produces(MediaType.APPLICATION_JSON)
+    fun list(): List<Configuration>? {
+        return configurationService.list()
+    }
 }

@@ -11,7 +11,7 @@ class SearchBuilder {
         search.document = Document()
     }
 
-    fun appendParamQuery(key: String?, value: Any): SearchBuilder? {
+    fun appendParamQuery(key: String?, value: Any): SearchBuilder {
         var value = value
         if (value.javaClass.isEnum) {
             value = value.toString()
@@ -20,7 +20,7 @@ class SearchBuilder {
         return this
     }
 
-    fun appendParamQuery(key: String, value: Any, operation: OperationEnum?): SearchBuilder? {
+    fun appendParamQuery(key: String, value: Any, operation: OperationEnum?): SearchBuilder {
         var value = value
         if (value.javaClass.isEnum) {
             value = value.toString()
@@ -76,7 +76,7 @@ class SearchBuilder {
         return this
     }
 
-    fun appendParamQuery(key: String?, value1: Any, value2: Any, operation: OperationEnum?): SearchBuilder? {
+    fun appendParamQuery(key: String?, value1: Any, value2: Any, operation: OperationEnum?): SearchBuilder {
         var value1 = value1
         var value2 = value2
         if (value1.javaClass.isEnum) {
@@ -93,7 +93,7 @@ class SearchBuilder {
         return this
     }
 
-    fun appendMap(map: Map<String?, Any?>?): SearchBuilder? {
+    fun appendMap(map: Map<String?, Any?>?): SearchBuilder {
         if (map != null) {
             for (key in map.keys) {
                 appendParamQuery(key, map[key]!!)
@@ -102,7 +102,7 @@ class SearchBuilder {
         return this
     }
 
-    fun appendSort(key: String?, value: Int?): SearchBuilder? {
+    fun appendSort(key: String?, value: Int?): SearchBuilder {
         if (search.sortDoc == null) {
             search.sortDoc = Document()
         }
@@ -110,22 +110,22 @@ class SearchBuilder {
         return this
     }
 
-    fun setFirst(first: Int?): SearchBuilder? {
+    fun setFirst(first: Int?): SearchBuilder {
         search.first = first
         return this
     }
 
-    fun setMaxResults(maxResults: Int?): SearchBuilder? {
+    fun setMaxResults(maxResults: Int?): SearchBuilder {
         search.maxResults = maxResults
         return this
     }
 
-    fun setProjection(projection: SearchProjection?): SearchBuilder? {
+    fun setProjection(projection: SearchProjection?): SearchBuilder {
         search.projection = projection
         return this
     }
 
-    fun setQuery(query: Document?): SearchBuilder? {
+    fun setQuery(query: Document?): SearchBuilder {
         search.document = query
         return this
     }

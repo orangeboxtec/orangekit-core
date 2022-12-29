@@ -95,6 +95,15 @@ abstract class AbstractDAO<O>(klass: Class<O>) {
         } else null
     }
 
+    open fun retrieve(id: String): O? {
+        val db: MongoDatabase = getDb()
+        val list = ArrayList<O>()
+        db.getCollection(entityName!!, klass!!).find(BasicDBObject("_id", id)).into(list)
+        return if (list.isEmpty()) {
+            list[0]
+        } else null
+    }
+
     open fun search(search: Search): List<O>? {
         val db = getDb()
         val list = ArrayList<O>()
@@ -133,7 +142,7 @@ abstract class AbstractDAO<O>(klass: Class<O>) {
         db.getCollection(entityName!!, klass!!).deleteOne(Filters.eq("_id", getId(bean)))
     }
 
-    open fun createBuilder(): SearchBuilder? {
+    open fun createBuilder(): SearchBuilder {
         return SearchBuilder()
     }
 

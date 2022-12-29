@@ -1,7 +1,12 @@
 package com.orangebox.kit.core.configuration
 
+import com.orangebox.kit.core.annotation.OKEntity
+import com.orangebox.kit.core.annotation.OKId
+
+@OKEntity("configuration")
 class Configuration {
 
+    @OKId
     var id: String? = null
 
     var key: String? = null
@@ -18,10 +23,5 @@ class Configuration {
 
     constructor(id: String?) {
         this.id = id
-    }
-
-    constructor(key: String?, value: String?) {
-        this.key = key
-        this.value = value
     }
 }
