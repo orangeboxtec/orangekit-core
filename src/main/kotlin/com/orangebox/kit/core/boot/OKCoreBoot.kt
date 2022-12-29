@@ -27,7 +27,7 @@ class OKCoreBoot {
                     "                        __/ |                                \n" +
                     "                       |___/                                 "
             println(x)
-            println("Plus Advanced!\n\n")
+            println("Powered by\n\n")
             configurationService.checkAndSave("PATH_BASE", "files")
             configurationService.checkAndSave("SIZE_DETAIL_MOBILE", "600")
             val params: MutableMap<String, String> = HashMap()

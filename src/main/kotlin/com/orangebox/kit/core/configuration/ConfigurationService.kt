@@ -10,9 +10,7 @@ class ConfigurationService {
     private lateinit var configurationDAO: ConfigurationDAO
 
     fun list(): List<Configuration>? {
-        return configurationDAO.search(configurationDAO.createBuilder()
-            .appendParamQuery("key", "chave")
-            .build())
+        return configurationDAO.listAll()
     }
 
     fun add(configuration: Configuration) {

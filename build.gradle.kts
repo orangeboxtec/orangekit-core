@@ -3,10 +3,11 @@ plugins {
     kotlin("plugin.allopen") version "1.7.20"
     id("io.quarkus")
     id("maven-publish")
+    id("org.kordamp.gradle.jandex") version "1.1.0"
 }
 
 group = "com.orangebox.kit.core"
-version = "0.0.2"
+version = "0.0.4"
 
 repositories {
     mavenCentral()

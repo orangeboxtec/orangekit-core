@@ -5,10 +5,12 @@ import com.mongodb.client.FindIterable
 import com.mongodb.client.MongoClient
 import com.mongodb.client.MongoDatabase
 import com.mongodb.client.model.Filters
+import com.orangebox.kit.core.annotation.OKDatabase
 import com.orangebox.kit.core.annotation.OKEntity
 import com.orangebox.kit.core.annotation.OKId
 import com.orangebox.kit.core.dto.ResponseList
 import org.apache.commons.lang3.reflect.FieldUtils
+import org.eclipse.microprofile.config.inject.ConfigProperty
 import java.lang.reflect.Field
 import java.util.*
 import java.util.Map
@@ -23,7 +25,8 @@ abstract class AbstractDAO<O>(klass: Class<O>) {
 
     private var entityName: String? = null
 
-    private var database: String? = null
+    @ConfigProperty(name = "orangekit.mongodb.database")
+    private lateinit var database: String
 
     init {
         if (klass.isAnnotationPresent(OKEntity::class.java)) {
@@ -31,6 +34,10 @@ abstract class AbstractDAO<O>(klass: Class<O>) {
         } else {
             entityName = klass.simpleName
             entityName = entityName!!.lowercase() + entityName!!.substring(1)
+        }
+
+        if (klass.isAnnotationPresent(OKDatabase::class.java)) {
+            database = klass.getAnnotation(OKDatabase::class.java).name
         }
     }
 
@@ -47,7 +54,7 @@ abstract class AbstractDAO<O>(klass: Class<O>) {
             }
         }
         return if (fields.isNotEmpty()) {
-            org.apache.commons.lang3.reflect.FieldUtils.readDeclaredField(bean, fields[0].name, true)
+            FieldUtils.readDeclaredField(bean, fields[0].name, true)
         } else null
     }
 
@@ -66,11 +73,7 @@ abstract class AbstractDAO<O>(klass: Class<O>) {
     }
 
     private fun getDb(): MongoDatabase {
-        if(database == null){
-            val bundle = ResourceBundle.getBundle("application")
-            database = bundle.getString("orangekit.mongodb.database")
-        }
-        return mongoClient.getDatabase(database!!)
+        return mongoClient.getDatabase(database)
     }
 
     open fun insert(bean: O) {
