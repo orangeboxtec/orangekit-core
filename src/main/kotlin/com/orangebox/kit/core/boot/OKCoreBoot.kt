@@ -28,7 +28,7 @@ class OKCoreBoot {
                     "                       |___/                                 "
             println(x)
             println("🍊")
-            println("Powered by\n\n")
+            println("Powered by")
         } catch (e: Exception) {
             e.printStackTrace()
         }
