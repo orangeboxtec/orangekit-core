@@ -72,7 +72,7 @@ abstract class AbstractDAO<O>(klass: Class<O>) {
         FieldUtils.writeDeclaredField(bean, fields[0].name, id, true)
     }
 
-    private fun getDb(): MongoDatabase {
+    open fun getDb(): MongoDatabase {
         return mongoClient.getDatabase(database)
     }
 
