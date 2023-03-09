@@ -11,8 +11,7 @@ import javax.ws.rs.core.MediaType
 class AddressUtils {
 
     fun geocodeAddress(address: AddressInfo) {
-        var txtAddr: String? = null
-        txtAddr = if (address.address != null) {
+        var txtAddr: String? = if (address.address != null) {
             address.address
         } else {
             textualAddress(address)

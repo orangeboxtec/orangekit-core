@@ -33,16 +33,14 @@ class BucketService {
         val bucket = bucket
         bucket.params?.set("folder", pathFolder)
         bucket.params?.set("contentType", "image/jpg")
-        var sufix: String
-        sufix = if (namePrefix != null) {
+        var sufix: String = if (namePrefix != null) {
             "_original.jpg"
         } else {
             "original.jpg"
         }
 
         //write the original image
-        var data: ByteArray? = null
-        data = photoUpload.photoBytes
+        var data: ByteArray? = photoUpload.photoBytes
 
         //create the crop version
         sufix = if (namePrefix != null) {
