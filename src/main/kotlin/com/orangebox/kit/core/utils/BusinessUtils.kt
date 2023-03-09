@@ -9,14 +9,13 @@ class BusinessUtils<O>(dao: AbstractDAO<O>) {
         this.dao = dao
     }
 
-    @Throws(Exception::class)
     fun basicSave(bean: O) {
         if (dao.getId(bean) == null) {
             dao.insert(bean)
         } else {
             val beanBase: O? = dao.retrieve(bean)
             if (beanBase != null) {
-                for (field in bean.javaClass.getDeclaredFields()) {
+                for (field in bean!!::class.java.declaredFields) {
                     field.isAccessible = true
                     val obj = field[bean]
                     if (obj != null) {
@@ -28,15 +27,14 @@ class BusinessUtils<O>(dao: AbstractDAO<O>) {
         }
     }
 
-    @Throws(Exception::class)
     fun basicCopyObject(bean: O): O? {
-        var beanBase: O? = null
+        var beanBase: O?
         if (dao.getId(bean) == null) {
             return bean
         } else {
             beanBase = dao.retrieve(bean)
             if (beanBase != null) {
-                for (field in bean.javaClass.getDeclaredFields()) {
+                for (field in bean!!::class.java.declaredFields) {
                     field.isAccessible = true
                     val obj = field[bean]
                     if (obj != null) {

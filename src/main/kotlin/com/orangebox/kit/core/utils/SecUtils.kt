@@ -11,7 +11,6 @@ import javax.crypto.spec.PBEKeySpec
 import javax.crypto.spec.SecretKeySpec
 
 object SecUtils {
-    @Throws(Exception::class)
     fun crypt(keyBase: String, text: String): String {
         val infoCrypt: String
         val aesKey: Key = SecretKeySpec(keyBase.toByteArray(), "AES")
@@ -22,7 +21,6 @@ object SecUtils {
         return infoCrypt
     }
 
-    @Throws(Exception::class)
     fun decrypt(keyBase: String, text: String?): String {
         val infoCrypt: String
         val aesKey: Key = SecretKeySpec(keyBase.toByteArray(), "AES")
@@ -30,7 +28,7 @@ object SecUtils {
         cipher.init(Cipher.DECRYPT_MODE, aesKey)
         val textData = Base64.decodeBase64(text)
         val dados = cipher.doFinal(textData)
-        infoCrypt = kotlin.String(dados)
+        infoCrypt = dados.toString()
         return infoCrypt
     }
 
@@ -47,7 +45,7 @@ object SecUtils {
 
     @get:Throws(NoSuchAlgorithmException::class)
     private val saltBytes: ByteArray
-        private get() {
+        get() {
             val sr = SecureRandom.getInstance("SHA1PRNG")
             val salt = ByteArray(16)
             sr.nextBytes(salt)
