@@ -1,27 +1,25 @@
-package com.orangebox.kit.core
+package com.orangebox.kit.core.configuration
 
-import com.orangebox.kit.core.configuration.Configuration
-import com.orangebox.kit.core.configuration.ConfigurationService
 import javax.inject.Inject
 import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
 
-@Path("/hello")
-class ExampleResource {
+@Path("/configuration")
+class ConfigurationRestService {
 
     @Inject
     private lateinit var configurationService: ConfigurationService
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    fun hello() = "Hello from RESTEasy Reactive"
+    fun hello() = "Hello from Configuration Service!"
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/addConfiguration")
+    @Path("/save")
     @Throws(Exception::class)
-    fun addConfiguration(configuration: Configuration){
-        configurationService.add(configuration)
+    fun save(configuration: Configuration){
+        configurationService.save(configuration)
     }
 
     @GET

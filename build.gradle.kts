@@ -23,15 +23,22 @@ val quarkusPlatformVersion: String by project
 
 dependencies {
     implementation("io.quarkus:quarkus-resteasy-reactive-jsonb")
-    implementation(platform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
-//    implementation(platform("${quarkusPlatformGroupId}:quarkus-amazon-services-bom:${quarkusPlatformVersion}"))
+    implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
+    implementation(enforcedPlatform("${quarkusPlatformGroupId}:quarkus-amazon-services-bom:${quarkusPlatformVersion}"))
     implementation("io.quarkus:quarkus-resteasy-reactive")
     implementation("io.quarkus:quarkus-kotlin")
-//    implementation("io.quarkiverse.amazonservices:quarkus-amazon-s3")
+    implementation("io.quarkiverse.amazonservices:quarkus-amazon-s3")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("io.quarkus:quarkus-arc")
     implementation("io.quarkus:quarkus-mongodb-client")
     implementation("org.apache.commons:commons-lang3")
+    implementation("com.jayway.jsonpath:json-path:2.7.0")
+    implementation("commons-io:commons-io")
+    implementation("net.coobird:thumbnailator:0.4.19")
+    implementation("commons-codec:commons-codec")
+    implementation("software.amazon.awssdk:netty-nio-client:2.15.32")
+
+
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
 }

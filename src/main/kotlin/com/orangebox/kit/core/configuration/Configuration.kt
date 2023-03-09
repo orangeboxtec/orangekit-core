@@ -13,7 +13,7 @@ class Configuration {
 
     var value: String? = null
 
-    var valueData: Map<String, String>? = null
+    var valueData: HashMap<String, String>? = null
 
     var fgActive: Boolean? = null
 

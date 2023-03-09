@@ -13,8 +13,13 @@ class ConfigurationService {
         return configurationDAO.listAll()
     }
 
-    fun add(configuration: Configuration) {
-        configurationDAO.insert(configuration)
+    fun save(configuration: Configuration) {
+        if(configuration.id == null){
+            configurationDAO.insert(configuration)
+        }
+        else {
+            configurationDAO.update(configuration)
+        }
     }
 
     fun loadByCode(code: String): Configuration? {
@@ -39,7 +44,6 @@ class ConfigurationService {
         configurationDAO.insert(configuration)
     }
 
-    @Throws(Exception::class)
     fun checkAndSave(key: String, value: String) {
         var configuration = configurationDAO.loadByCodeNative(key)
         if (configuration == null) {
@@ -50,7 +54,7 @@ class ConfigurationService {
         }
     }
 
-    fun checkAndSave(key: String, value: Map<String, String>) {
+    fun checkAndSave(key: String, value: HashMap<String, String>) {
         var configuration = configurationDAO.loadByCodeNative(key)
         if (configuration == null) {
             configuration = Configuration()
