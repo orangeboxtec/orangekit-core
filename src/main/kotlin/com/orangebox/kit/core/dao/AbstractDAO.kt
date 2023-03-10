@@ -93,7 +93,7 @@ abstract class AbstractDAO<O>(klass: Class<O>) {
         val db: MongoDatabase = getDb()
         val list = ArrayList<O>()
         db.getCollection(entityName!!, klass!!).find(BasicDBObject("_id", getId(bean))).into(list)
-        return if (list.isEmpty()) {
+        return if (list.isNotEmpty()) {
             list[0]
         } else null
     }
@@ -102,7 +102,7 @@ abstract class AbstractDAO<O>(klass: Class<O>) {
         val db: MongoDatabase = getDb()
         val list = ArrayList<O>()
         db.getCollection(entityName!!, klass!!).find(BasicDBObject("_id", id)).into(list)
-        return if (list.isEmpty()) {
+        return if (list.isNotEmpty()) {
             list[0]
         } else null
     }
