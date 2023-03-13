@@ -1,5 +1,5 @@
 package com.orangebox.kit.core.photo
 
-enum class PhotoUploadTypeEnum {
+enum class FileUploadTypeEnum {
     IMAGE, VIDEO, YOUTUBE
 }

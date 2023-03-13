@@ -1,5 +1,5 @@
 package com.orangebox.kit.core.photo
 
-enum class PhotoUploadStatusEnum {
+enum class FileUploadStatusEnum {
     ACTIVE, BLOCKED
 }

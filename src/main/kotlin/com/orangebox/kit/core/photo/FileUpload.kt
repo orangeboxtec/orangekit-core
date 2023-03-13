@@ -1,6 +1,6 @@
 package com.orangebox.kit.core.photo
 
-class PhotoUpload {
+class FileUpload {
 
     var id: String? = null
 
@@ -8,7 +8,7 @@ class PhotoUpload {
 
     var idSubObject: String? = null
 
-    var photo: String? = null
+    var file: String? = null
 
     var title: String? = null
 
@@ -16,7 +16,7 @@ class PhotoUpload {
 
     var url: String? = null
 
-    var photoBytes: ByteArray? = null
+    var fileBytes: ByteArray? = null
 
     var x: Double? = null
 
@@ -32,9 +32,9 @@ class PhotoUpload {
 
     var index: Int? = null
 
-    var type: PhotoUploadTypeEnum? = null
+    var type: FileUploadTypeEnum? = null
 
-    var status: PhotoUploadStatusEnum? = null
+    var status: FileUploadStatusEnum? = null
 
     var infoUrl: InfoUrl? = null
 }

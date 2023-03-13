@@ -17,20 +17,20 @@ class S3Bucket : Bucket() {
 
     override fun saveFile(name: String, sufix: String?, data: ByteArray): String {
         val req = PutObjectRequest.builder()
-            .bucket(params?.get("bucketName"))
+            .bucket(params["bucketName"])
             .key(name)
-            .contentType(params?.get("contentType"))
+            .contentType(params["contentType"])
             .contentLength(data.size.toLong())
             .build()
 
         s3Client.putObject(req, AsyncRequestBody.fromBytes(data))
 
-        return "https://" + params?.get("bucketName") + ".s3-sa-east-1.amazonaws.com/" + name
+        return "https://" + params["bucketName"] + ".s3-sa-east-1.amazonaws.com/" + name
     }
 
     override fun deleteFile(name: String) {
         val req = DeleteObjectRequest.builder()
-            .bucket(params?.get("bucketName"))
+            .bucket(params["bucketName"])
             .key(name)
             .build()
 
