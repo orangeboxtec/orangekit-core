@@ -47,7 +47,7 @@ class S3Bucket : Bucket() {
 
     override fun deleteFile(name: String) {
         val req = DeleteObjectRequest.builder()
-            .bucket(params["bucketName"])
+            .bucket(bucketName)
             .key(name)
             .build()
 
