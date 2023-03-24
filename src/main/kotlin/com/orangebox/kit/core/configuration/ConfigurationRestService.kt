@@ -1,5 +1,8 @@
 package com.orangebox.kit.core.configuration
 
+import com.orangebox.kit.core.bucket.BucketService
+import com.orangebox.kit.core.exception.BusinessException
+import com.orangebox.kit.core.photo.FileUpload
 import javax.inject.Inject
 import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
@@ -10,9 +13,8 @@ class ConfigurationRestService {
     @Inject
     private lateinit var configurationService: ConfigurationService
 
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    fun hello() = "Hello from Configuration Service!"
+    @Inject
+    private lateinit var bucketService: BucketService
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
@@ -27,5 +29,13 @@ class ConfigurationRestService {
     @Produces(MediaType.APPLICATION_JSON)
     fun list(): List<Configuration>? {
         return configurationService.list()
+    }
+
+
+    @POST
+    @Consumes("application/json")
+    @Path("/saveFile")
+    fun saveAvatar(fileUpload: FileUpload): String? {
+        return bucketService.saveFile(fileUpload, "userb", null, "image/jpg")
     }
 }

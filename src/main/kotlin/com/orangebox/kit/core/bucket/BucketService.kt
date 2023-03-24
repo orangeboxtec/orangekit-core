@@ -112,9 +112,10 @@ class BucketService {
         val data: ByteArray = if (fileUpload.fileBytes != null) {
             fileUpload.fileBytes!!
         } else {
+            fileUpload.file = fileUpload.file?.replace("data:image/jpeg;base64,", "")
             Base64.decodeBase64(fileUpload.file)
         }
-        return bucket.saveFile(namePrefix, "", data)
+        return bucket.saveFile(namePrefix, fileUpload.idObject, data)
     }
 
 
