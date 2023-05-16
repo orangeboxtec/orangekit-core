@@ -1,14 +1,14 @@
 package com.orangebox.kit.core.user
 
-class GeneralUser {
-    val id: String? = null
-    val email: String? = null
-    val tokenFirebase: String? = null
-    val phoneCountryCode: Int? = null
-    val phoneNumber: Long? = null
-    var name: String? = null
-    var lastName: String? = null
-    var urlImage: String? = null
+interface GeneralUser {
+    val id: String?
+    val email: String?
+    val tokenFirebase: String?
+    val phoneCountryCode: Int?
+    val phoneNumber: Long?
+    var name: String?
+    var lastName: String?
+    var urlImage: String?
 
     fun toCard(): UserCard{
         val card = UserCard()
