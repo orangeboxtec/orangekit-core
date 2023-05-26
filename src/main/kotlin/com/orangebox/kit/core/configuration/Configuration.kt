@@ -2,6 +2,7 @@ package com.orangebox.kit.core.configuration
 
 import com.orangebox.kit.core.annotation.OKEntity
 import com.orangebox.kit.core.annotation.OKId
+import java.util.Date
 
 @OKEntity("configuration")
 class Configuration {
@@ -18,6 +19,8 @@ class Configuration {
     var fgActive: Boolean? = null
 
     var fgMobile: Boolean? = null
+
+    var date: Date? = null
 
     constructor()
 

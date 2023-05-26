@@ -11,10 +11,10 @@ class AppTokenService {
     private lateinit var appTokenDAO: AppTokenDAO
 
     @ConfigProperty(name = "orangekit.core.applicationtoken", defaultValue = "false")
-    private lateinit var userAnonymous: String
+    private lateinit var appToken: String
 
     fun checkAppToken(token: String): Boolean {
-        if(userAnonymous.toBoolean()){
+        if(appToken.toBoolean()){
             val appToken = appTokenDAO.retrieve(appTokenDAO.createBuilder()
                 .appendParamQuery("token", token)
                 .build()
