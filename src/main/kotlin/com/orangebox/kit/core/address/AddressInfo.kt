@@ -16,6 +16,8 @@ class AddressInfo {
 
 	var city: String? = null
 
+    var cityCode: String? = null
+
     var state: String? = null
 
 	var zipCode: String? = null
