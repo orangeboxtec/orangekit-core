@@ -6,9 +6,9 @@ interface GeneralUser {
     val tokenFirebase: String?
     val phoneCountryCode: Int?
     val phoneNumber: Long?
-    var name: String?
-    var lastName: String?
-    var urlImage: String?
+    val name: String?
+    val lastName: String?
+    val urlImage: String?
 
     fun toCard(): UserCard{
         val card = UserCard()
