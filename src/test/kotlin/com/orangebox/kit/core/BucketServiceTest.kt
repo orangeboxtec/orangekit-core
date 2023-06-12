@@ -1,7 +1,7 @@
 package com.orangebox.kit.core
 
 import com.orangebox.kit.core.bucket.BucketService
-import com.orangebox.kit.core.photo.FileUpload
+import com.orangebox.kit.core.file.FileUpload
 import io.quarkus.test.junit.QuarkusTest
 import org.eclipse.microprofile.config.inject.ConfigProperty
 import org.junit.jupiter.api.Assertions

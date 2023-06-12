@@ -2,7 +2,7 @@ package com.orangebox.kit.core.bucket
 
 import com.orangebox.kit.core.bucket.aws.s3.S3Bucket
 import com.orangebox.kit.core.bucket.local.LocalBucket
-import com.orangebox.kit.core.photo.FileUpload
+import com.orangebox.kit.core.file.FileUpload
 import net.coobird.thumbnailator.Thumbnails
 import org.apache.commons.codec.binary.Base64
 import org.eclipse.microprofile.config.inject.ConfigProperty

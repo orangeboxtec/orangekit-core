@@ -1,8 +1,7 @@
 package com.orangebox.kit.core.configuration
 
 import com.orangebox.kit.core.bucket.BucketService
-import com.orangebox.kit.core.exception.BusinessException
-import com.orangebox.kit.core.photo.FileUpload
+import com.orangebox.kit.core.file.FileUpload
 import javax.inject.Inject
 import javax.ws.rs.*
 import javax.ws.rs.core.MediaType

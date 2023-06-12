@@ -1,4 +1,4 @@
-package com.orangebox.kit.core.photo
+package com.orangebox.kit.core.file
 
 import org.bson.codecs.pojo.annotations.BsonProperty
 

@@ -1,4 +1,4 @@
-package com.orangebox.kit.core.photo
+package com.orangebox.kit.core.file
 
 class FileUpload {
 
@@ -15,6 +15,8 @@ class FileUpload {
     var token: String? = null
 
     var url: String? = null
+
+    var contentType: String? = null
 
     var fileBytes: ByteArray? = null
 
