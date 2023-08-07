@@ -145,6 +145,11 @@ abstract class AbstractDAO<O>(klass: Class<O>) {
         db.getCollection(entityName!!, klass!!).deleteOne(Filters.eq("_id", getId(bean)))
     }
 
+    open fun delete(id: String) {
+        val db: MongoDatabase = getDb()
+        db.getCollection(entityName!!, klass!!).deleteOne(Filters.eq("_id", id))
+    }
+
     open fun createBuilder(): SearchBuilder {
         return SearchBuilder()
     }
