@@ -16,6 +16,7 @@ interface GeneralUser {
         card.name = this.name
         card.lastName = this.lastName
         card.urlImage = this.urlImage
+        card.email = this.email
         return card
     }
 }
