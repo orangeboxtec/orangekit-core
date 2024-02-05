@@ -14,6 +14,7 @@ class AppTokenService {
     private lateinit var appToken: String
 
     fun checkAppToken(token: String): Boolean {
+        println("VERIFICANDO TOKEN NA BASE: $token")
         if(appToken.toBoolean()){
             val appToken = appTokenDAO.retrieve(appTokenDAO.createBuilder()
                 .appendParamQuery("token", token)
