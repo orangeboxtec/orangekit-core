@@ -1,14 +1,13 @@
 package com.orangebox.kit.core.bucket.local
 
 import com.orangebox.kit.core.bucket.Bucket
+import jakarta.enterprise.context.ApplicationScoped
 import org.apache.commons.io.FileUtils
 import org.eclipse.microprofile.config.inject.ConfigProperty
 import java.io.File
-import java.lang.IllegalArgumentException
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class LocalBucket : Bucket() {

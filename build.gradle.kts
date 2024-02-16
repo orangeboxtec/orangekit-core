@@ -1,13 +1,16 @@
+import io.quarkus.gradle.tasks.QuarkusBuild
+import org.kordamp.gradle.plugin.jandex.tasks.JandexTask
+
 plugins {
-    kotlin("jvm") version "1.7.20"
-    kotlin("plugin.allopen") version "1.7.20"
+    id("org.kordamp.gradle.jandex") version "1.1.0"
+    kotlin("jvm") version "1.9.22"
+    kotlin("plugin.allopen") version "1.9.22"
     id("io.quarkus")
     id("maven-publish")
-    id("org.kordamp.gradle.jandex") version "1.1.0"
 }
 
 group = "com.orangebox.kit.core"
-version = "1.0.23"
+version = "2.0.0"
 
 repositories {
     mavenCentral()
@@ -58,6 +61,11 @@ allOpen {
     annotation("javax.ws.rs.Path")
     annotation("javax.enterprise.context.ApplicationScoped")
     annotation("io.quarkus.test.junit.QuarkusTest")
+}
+
+tasks.withType<JandexTask> {
+    dependsOn(":quarkusDependenciesBuild")
+    dependsOn(":test")
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {

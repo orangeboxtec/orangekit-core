@@ -1,16 +1,13 @@
 package com.orangebox.kit.core.bucket.aws.s3
 
 import com.orangebox.kit.core.bucket.Bucket
+import jakarta.enterprise.context.ApplicationScoped
+import jakarta.inject.Inject
 import org.eclipse.microprofile.config.inject.ConfigProperty
-import software.amazon.awssdk.core.async.AsyncRequestBody
 import software.amazon.awssdk.core.sync.RequestBody
-import software.amazon.awssdk.services.s3.S3AsyncClient
 import software.amazon.awssdk.services.s3.S3Client
 import software.amazon.awssdk.services.s3.model.DeleteObjectRequest
 import software.amazon.awssdk.services.s3.model.PutObjectRequest
-import java.lang.IllegalArgumentException
-import javax.enterprise.context.ApplicationScoped
-import javax.inject.Inject
 
 
 @ApplicationScoped
@@ -44,7 +41,7 @@ class S3Bucket : Bucket() {
             .acl("public-read")
             .build()
 
-        val x = s3Client.putObject(req, RequestBody.fromBytes(data))
+        s3Client.putObject(req, RequestBody.fromBytes(data))
         return "https://$bucketName.s3-$region.amazonaws.com/$fileName"
     }
 

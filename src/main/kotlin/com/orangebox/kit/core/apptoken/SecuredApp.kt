@@ -1,6 +1,6 @@
 package com.orangebox.kit.core.apptoken
 
-import javax.ws.rs.NameBinding
+import jakarta.ws.rs.NameBinding
 
 //the method that use the @Secured annotation can only be consumed 
 //by a admin portal (verified by a token in a filter)

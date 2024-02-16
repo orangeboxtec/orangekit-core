@@ -3,6 +3,8 @@ package com.orangebox.kit.core.bucket
 import com.orangebox.kit.core.bucket.aws.s3.S3Bucket
 import com.orangebox.kit.core.bucket.local.LocalBucket
 import com.orangebox.kit.core.file.FileUpload
+import jakarta.enterprise.context.ApplicationScoped
+import jakarta.inject.Inject
 import net.coobird.thumbnailator.Thumbnails
 import org.apache.commons.codec.binary.Base64
 import org.eclipse.microprofile.config.inject.ConfigProperty
@@ -10,9 +12,7 @@ import java.awt.image.BufferedImage
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
-import javax.enterprise.context.ApplicationScoped
 import javax.imageio.ImageIO
-import javax.inject.Inject
 
 @ApplicationScoped
 class BucketService {
@@ -97,10 +97,10 @@ class BucketService {
     fun saveFile(
         fileUpload: FileUpload,
         pathFolder: String,
-        namePrefix: String?,
+        nnamePrefix: String?,
         contentType: String
     ): String? {
-        var namePrefix = namePrefix
+        var namePrefix = nnamePrefix
         val bucket = bucket
         bucket.params["folder"] = pathFolder
         bucket.params["contentType"] = contentType

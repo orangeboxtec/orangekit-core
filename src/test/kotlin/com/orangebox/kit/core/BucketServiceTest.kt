@@ -3,11 +3,11 @@ package com.orangebox.kit.core
 import com.orangebox.kit.core.bucket.BucketService
 import com.orangebox.kit.core.file.FileUpload
 import io.quarkus.test.junit.QuarkusTest
+import jakarta.inject.Inject
 import org.eclipse.microprofile.config.inject.ConfigProperty
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import java.io.File
-import javax.inject.Inject
 
 @QuarkusTest
 class BucketServiceTest {

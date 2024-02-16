@@ -2,9 +2,9 @@ package com.orangebox.kit.core.boot
 
 import com.orangebox.kit.core.configuration.ConfigurationService
 import io.quarkus.runtime.Startup
-import javax.annotation.PostConstruct
-import javax.enterprise.context.ApplicationScoped
-import javax.inject.Inject
+import jakarta.annotation.PostConstruct
+import jakarta.enterprise.context.ApplicationScoped
+import jakarta.inject.Inject
 
 @Startup
 @ApplicationScoped
@@ -18,14 +18,14 @@ class OKCoreBoot {
     fun run() {
         try {
             //http://patorjk.com/software/taag/#p=display&f=Doom&t=OrangeKit%200.1
-            val x = " _____                            _   ___ _     __   _____ \n" +
-                    "|  _  |                          | | / (_) |   /  | |  _  |\n" +
-                    "| | | |_ __ __ _ _ __   __ _  ___| |/ / _| |_  `| | | |/' |\n" +
-                    "| | | | '__/ _` | '_ \\ / _` |/ _ \\    \\| | __|  | | |  /| |\n" +
-                    "\\ \\_/ / | | (_| | | | | (_| |  __/ |\\  \\ | |_  _| |_\\ |_/ /\n" +
-                    " \\___/|_|  \\__,_|_| |_|\\__, |\\___\\_| \\_/_|\\__| \\___(_)___/ \n" +
-                    "                        __/ |                              \n" +
-                    "                       |___/                               "
+            val x = " _____                            _   ___ _     _____  _____ \n" +
+                    "|  _  |                          | | / (_) |   / __  \\|  _  |\n" +
+                    "| | | |_ __ __ _ _ __   __ _  ___| |/ / _| |_  `' / /'| |/' |\n" +
+                    "| | | | '__/ _` | '_ \\ / _` |/ _ \\    \\| | __|   / /  |  /| |\n" +
+                    "\\ \\_/ / | | (_| | | | | (_| |  __/ |\\  \\ | |_  ./ /___\\ |_/ /\n" +
+                    " \\___/|_|  \\__,_|_| |_|\\__, |\\___\\_| \\_/_|\\__| \\_____(_)___/ \n" +
+                    "                        __/ |                                \n" +
+                    "                       |___/                                 "
             println(x)
             println("🍊")
             println("Powered by")

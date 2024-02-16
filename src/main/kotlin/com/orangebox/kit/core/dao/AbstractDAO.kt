@@ -9,12 +9,12 @@ import com.orangebox.kit.core.annotation.OKDatabase
 import com.orangebox.kit.core.annotation.OKEntity
 import com.orangebox.kit.core.annotation.OKId
 import com.orangebox.kit.core.dto.ResponseList
+import jakarta.inject.Inject
 import org.apache.commons.lang3.reflect.FieldUtils
 import org.eclipse.microprofile.config.inject.ConfigProperty
 import java.lang.reflect.Field
 import java.util.*
 import java.util.Map
-import javax.inject.Inject
 
 abstract class AbstractDAO<O>(klass: Class<O>) {
 
