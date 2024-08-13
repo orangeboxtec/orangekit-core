@@ -35,7 +35,7 @@ class BucketService {
     fun saveImage(fileUpload: FileUpload, pathFolder: String, namePrefix: String?): String? {
         val bucket = bucket
         bucket.params["folder"] = pathFolder
-        bucket.params["contentType"] = "image/jpg"
+        bucket.params["contentType"] = "image/png"
 
         var name = namePrefix
         if(name == null){
@@ -47,9 +47,9 @@ class BucketService {
 
         //create the crop version
         val sufix: String = if (namePrefix != null) {
-            "_main.jpg"
+            "_main.png"
         } else {
-            "main.jpg"
+            "main.png"
         }
         var bais: ByteArrayInputStream? = ByteArrayInputStream(data)
         val bimg: BufferedImage = ImageIO.read(bais)
@@ -58,22 +58,24 @@ class BucketService {
         var scale = 1.0
         if (fileUpload.finalWidth != null) {
             scale = fileUpload.finalWidth!! * 100 / width / 100
+            val b: Thumbnails.Builder<out InputStream?> = Thumbnails.of(bais)
+                .scale(scale)
+            if (fileUpload.x != null) {
+                b.sourceRegion(
+                    fileUpload.x!!.toInt(), fileUpload.y!!.toInt(),
+                    fileUpload.width!!.toInt(), fileUpload.height!!.toInt()
+                )
+            }
+            b.outputFormat("png")
+            if (fileUpload.rotate != null) {
+                b.rotate(fileUpload.rotate!!.toDouble())
+            }
+            val baos = ByteArrayOutputStream()
+            b.toOutputStream(baos)
+            return bucket.saveFile(name!!, sufix, baos.toByteArray())
+        } else {
+            return bucket.saveFile(name!!, sufix, data!!)
         }
-        val b: Thumbnails.Builder<out InputStream?> = Thumbnails.of(bais)
-            .scale(scale)
-        if (fileUpload.x != null) {
-            b.sourceRegion(
-                fileUpload.x!!.toInt(), fileUpload.y!!.toInt(),
-                fileUpload.width!!.toInt(), fileUpload.height!!.toInt()
-            )
-        }
-        b.outputFormat("jpg")
-        if (fileUpload.rotate != null) {
-            b.rotate(fileUpload.rotate!!.toDouble())
-        }
-        val baos = ByteArrayOutputStream()
-        b.toOutputStream(baos)
-        return bucket.saveFile(name!!, sufix, baos.toByteArray())
     }
 
     fun saveVideo(fileUpload: FileUpload, pathFolder: String, namePrefix: String): String? {
