@@ -8,6 +8,7 @@ import java.util.*
 class AppToken {
     @OKId
     var id: String? = null
+    var idObj: String? = null
     var token: String? = null
     var name: String? = null
     var creationDate: Date? = null
