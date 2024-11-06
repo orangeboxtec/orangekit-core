@@ -11,5 +11,6 @@ class AppToken {
     var idObj: String? = null
     var token: String? = null
     var name: String? = null
+    var status: String? = null
     var creationDate: Date? = null
 }

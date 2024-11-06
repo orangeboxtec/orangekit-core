@@ -18,6 +18,7 @@ class AppTokenService {
         if(appToken.toBoolean()){
             val appToken = appTokenDAO.retrieve(appTokenDAO.createBuilder()
                 .appendParamQuery("token", token)
+                .appendParamQuery("status", "ACTIVE")
                 .build()
             )
             return appToken != null
