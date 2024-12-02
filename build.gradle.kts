@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "com.orangebox.kit.core"
-version = "2.0.7"
+version = "2.0.8"
 
 repositories {
     mavenCentral()

@@ -34,6 +34,7 @@ class ConfigurationService {
         val configurationBase = loadByCode(configuration.key!!)
         if (configurationBase != null) {
             configurationBase.value = configuration.value!!
+            configurationBase.valueData = configuration.valueData!!
             configurationDAO.update(configurationBase)
         } else {
             configurationDAO.insert(configuration)
