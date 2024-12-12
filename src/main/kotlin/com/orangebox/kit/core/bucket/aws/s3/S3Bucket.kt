@@ -4,9 +4,12 @@ import com.orangebox.kit.core.bucket.Bucket
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.inject.Inject
 import org.eclipse.microprofile.config.inject.ConfigProperty
+import software.amazon.awssdk.core.ResponseInputStream
 import software.amazon.awssdk.core.sync.RequestBody
 import software.amazon.awssdk.services.s3.S3Client
 import software.amazon.awssdk.services.s3.model.DeleteObjectRequest
+import software.amazon.awssdk.services.s3.model.GetObjectRequest
+import software.amazon.awssdk.services.s3.model.GetObjectResponse
 import software.amazon.awssdk.services.s3.model.PutObjectRequest
 
 
@@ -52,5 +55,11 @@ class S3Bucket : Bucket() {
             .build()
 
         s3Client.deleteObject(req)
+    }
+
+    override fun downloadFile(key: String): ByteArray {
+        val getObjectRequest = GetObjectRequest.builder().bucket(bucketName).key(key).build()
+        val response: ResponseInputStream<GetObjectResponse> = s3Client.getObject(getObjectRequest)
+        return response.use { it.readBytes() }
     }
 }

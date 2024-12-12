@@ -49,4 +49,8 @@ class LocalBucket : Bucket() {
             throw IllegalArgumentException("orangekit.core.bucket.local.urlbase must be provided in .env")
         }
     }
+
+    override fun downloadFile(key: String): ByteArray? {
+        TODO("Not yet implemented")
+    }
 }

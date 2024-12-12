@@ -135,4 +135,9 @@ class BucketService {
                 localBucket
             }
         }
+
+    fun saveFile(key: String): ByteArray?{
+        val bucket = bucket
+        return bucket.downloadFile(key)
+    }
 }
