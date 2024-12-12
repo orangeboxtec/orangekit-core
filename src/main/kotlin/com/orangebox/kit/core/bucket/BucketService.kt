@@ -136,7 +136,7 @@ class BucketService {
             }
         }
 
-    fun saveFile(key: String): ByteArray?{
+    fun downloadFile(key: String): ByteArray?{
         val bucket = bucket
         return bucket.downloadFile(key)
     }
