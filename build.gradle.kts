@@ -1,15 +1,15 @@
 import org.kordamp.gradle.plugin.jandex.tasks.JandexTask
 
 plugins {
-    kotlin("jvm") version "1.9.22"
-    kotlin("plugin.allopen") version "1.9.22"
+    kotlin("jvm") version "2.0.21"
+    kotlin("plugin.allopen") version "2.0.21"
     id("io.quarkus")
     id("maven-publish")
-    id("org.kordamp.gradle.jandex") version "1.1.0"
+    id("org.kordamp.gradle.jandex") version "2.1.0"
 }
 
 group = "com.orangebox.kit.core"
-version = "2.0.10"
+version = "2.1.0"
 
 repositories {
     mavenCentral()
@@ -24,10 +24,9 @@ val quarkusPlatformArtifactId: String by project
 val quarkusPlatformVersion: String by project
 
 dependencies {
-    implementation("io.quarkus:quarkus-resteasy-reactive-jsonb")
+    implementation("io.quarkus:quarkus-rest-jsonb")
     implementation(platform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
     implementation(platform("${quarkusPlatformGroupId}:quarkus-amazon-services-bom:${quarkusPlatformVersion}"))
-    implementation("io.quarkus:quarkus-resteasy-reactive")
     implementation("io.quarkus:quarkus-kotlin")
     implementation("io.quarkiverse.amazonservices:quarkus-amazon-s3")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -48,28 +47,22 @@ dependencies {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 tasks.withType<Test> {
     systemProperty("java.util.logging.manager", "org.jboss.logmanager.LogManager")
 }
 
+tasks.withType<JandexTask> {
+    dependsOn(":quarkusDependenciesBuild")
+}
+
 allOpen {
     annotation("javax.ws.rs.Path")
     annotation("javax.enterprise.context.ApplicationScoped")
     annotation("io.quarkus.test.junit.QuarkusTest")
-}
-
-tasks.withType<JandexTask> {
-    dependsOn(":quarkusDependenciesBuild")
-    dependsOn(":test")
-}
-
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
-    kotlinOptions.javaParameters = true
 }
 
 publishing {
