@@ -93,6 +93,25 @@ class SearchBuilder {
         return this
     }
 
+    fun appendParamQuery(key: String?, value1: Any, key2: String?, value2: Any, operation: OperationEnum?): SearchBuilder {
+        var value1 = value1
+        var value2 = value2
+
+        if (value1.javaClass.isEnum) value1 = value1.toString()
+        if (value2.javaClass.isEnum) value2 = value2.toString()
+
+        when (operation) {
+            OperationEnum.OR -> search.document!!.append(
+                "\$or", listOf(
+                    Document(key, value1),
+                    Document(key2, value2)
+                )
+            )
+            else -> {}
+        }
+        return this
+    }
+
     fun appendMap(map: Map<String?, Any?>?): SearchBuilder {
         if (map != null) {
             for (key in map.keys) {
